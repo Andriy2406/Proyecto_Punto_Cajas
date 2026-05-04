@@ -1,0 +1,399 @@
+/* RESET GENERAL */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* BODY */
+body{
+    background-color: #f4fdf6;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    width: 100%;
+    height: 70px;
+    background-color: #1b5e20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 60px;
+    flex-wrap: wrap;
+}
+
+.logo-container{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+.logo-container :placeholder-shown{
+    display: flex;
+    margin-left: 50px;
+}
+
+.logo-container img{
+    width: 90px;
+    height: 70px;
+}
+
+.logo-container h2{
+    color: white;
+}
+
+.menu a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin-left: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.menu a:hover{
+    color: #a5d6a7;
+}
+
+.Recuperar-contenedor {
+    margin-top: -10px; /* Sube un poco para pegarse al input de contraseña */
+    margin-bottom: 20px; /* Separa el bloque del botón 'Entrar' */
+    text-align: right; /* Alinea el texto a la derecha para un look moderno */
+}
+
+.Recuperar-contenedor p {
+    font-size: 13px;
+    color: #666; /* Un gris suave para el párrafo */
+    margin-bottom: 4px;
+}
+
+.Recuperar-contenedor a {
+    font-size: 14px;
+    color: #2e7d32; /* Verde intermedio acorde a tu paleta */
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.Recuperar-contenedor a:hover {
+    color: #1b5e20; /* Oscurece al pasar el mouse */
+    text-decoration: underline;
+}
+
+/* ================= FORMULARIO ================= */
+
+section{
+    width: 100%;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.metodospago{
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    width: 500px;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0px 8px 20px rgba(0,0,0,0.1);
+}
+
+
+.largo {
+    width: 100% ;
+    padding: 14px;
+    font-size: 22px;
+    border-radius: 8px;
+    border: 1px solid #c8e6c9;
+}
+
+.largo2{
+    width: 100% ;
+    padding: 14px;
+    font-size: 22px;
+    border-radius: 8px;
+    border: 1px solid #c8e6c9;
+}
+
+.espacio{
+    display: flex; 
+    gap: 15px;
+}
+
+.campo{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label{
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+.campo input{
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #c8e6c9;
+    outline: none;
+}
+
+.direccion label{
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+.Pago label{
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+.cajitas .espacio{
+    flex: 1;
+}
+
+.metodo-detalle{
+    display: none; /* Oculto por defecto*/
+    margin-top: 25px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+}
+
+
+
+input, select{
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+}
+
+/* Cajas */
+.Caja{
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Caja label{
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+/* Inputs y Select */
+.Contenedor input,
+.type select{
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #c8e6c9;
+    outline: none;
+    transition: 0.3s;
+}
+
+.Contenedor input:focus,
+.type select:focus{
+    border: 1px solid #2e7d32;
+    box-shadow: 0 0 5px rgba(46,125,50,0.4);
+}
+
+/* =================Formulario de pago================*/
+
+/* CONTENEDOR GENERAL */
+.checkout-container{
+    font-size: 15px;
+    max-width: 1200px;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* COLUMNA IZQUIERDA */
+.checkout-left{
+    flex: 2;
+}
+
+/* COLUMNA DERECHA */
+.checkout-right{
+    flex: 1;
+}
+
+/* TARJETA RESUMEN */
+.resumen-card{
+    background: rgb(255, 255, 255);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* PRODUCTO */
+.producto-resumen{
+    display: flex;
+    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.producto-resumen img{
+    width: 60px;
+    border-radius: 8px;
+}
+
+.producto-resumen h4{
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+/* LÍNEAS */
+.resumen-linea{
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.resumen-total{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+/* BOTÓN */
+.btn-pagar{
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-pagar:hover{
+    background-color: #1b5e20;
+}
+
+
+/* Ajuste para que se vea lado a lado */
+
+.checkout-left{
+    padding-right: 40 px;
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.metodospago{
+    width: 100%;
+    max-width: 650px;
+}
+
+.checkout-right{
+    padding-left: 40px;
+    flex: 1;
+    
+    
+    
+}
+
+.checkout-container{
+    align-items: flex-start;
+    display: flex;
+    gap: 40 px;
+}
+
+
+
+
+/* RESPONSIVE */
+@media (max-width: 900px){
+    .checkout-container{
+        flex-direction: column;
+    }
+}
+
+/* BOTON */
+button{
+    width: 100%;
+    padding: 12px;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: #1b5e20;
+}
+
+
+
+header input{
+    align-items: center;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 50px;
+}
+
+.producto {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    width: 220px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px
+rgba(0, 0, 0, 0.1);
+    text-align: center
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.precio {
+    display: block;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #1b5e20;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+
+    .menu {
+        flex-direction: column;
+        width: 100%;
+    }
+}
