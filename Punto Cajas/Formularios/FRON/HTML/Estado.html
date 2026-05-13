@@ -1,0 +1,81 @@
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="estilos_dylan.css">
+      <title>Estado</title>
+      <!-- Iconos -->
+<link href="/CSS/estilos_dylan.css" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="/IMG/logo.png" alt="logo">
+            <h2>Punto Cajas</h2>
+            <input type="text" placeholder="Buscar producto...">
+        </div>
+
+        <nav class="menu">
+            <a href="/HTML/Registro.html" target="_blank">Registro</a>
+            <a href="Inicio_Sesion.html" target="_blank">Iniciar sesion</a>
+            <a href="estado.html">Estado</a>
+            <a href="catalogo.html">Catalogo</a>
+            <a href="Cotizaciones.html">Cotizaciones</a>
+        </nav>
+    </header>
+<div class="margen"></div>
+<div class="contenedor">
+
+    <h1>Consulte su Pedido</h1>
+
+    <div class="barra">
+        <input type="text" placeholder="Buscar por ID o Nombre">
+    </div>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Medidas</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+            <th>Detalle</th>
+        </tr>
+
+        <tr>
+            <td>#12345</td>
+            <td>Nelson Ocampo</td>
+            <td>00/00/00</td>
+            <td>100x100x50 cm</td>
+            <td>10</td>
+            <td><span class="proceso proceso">En Proceso</span></td>
+            <td><a href="#" class="boton">Ver</a></td>
+        </tr>
+
+        <tr>
+            <td>#123456</td>
+            <td>Andriy Guzman</td>
+            <td>00/00/00</td>
+            <td>100x200x80 cm</td>
+            <td>5</td>
+            <td><span class="proceso finalizado">Finalizado</span></td>
+            <td><a href="#" class="boton">Ver</a></td>
+        </tr>
+
+        <tr>
+            <td>#1234567</td>
+            <td>Dylan Trujillo</td>
+            <td>00/00/00</td>
+            <td>50x50x50 cm</td>
+            <td>12</td>
+            <td><span class="proceso revision">En Revisión</span></td>
+            <td><a href="#" class="boton">Ver</a></td>
+        </tr>
+
+    </table>
+
+</div>
+</body>
+  </html>
