@@ -47,6 +47,7 @@ CREATE TABLE Rol_permisos (
   PRIMARY KEY (id_roles_y_permisos),
   CONSTRAINT fk_Rol_permisos_Rol FOREIGN KEY (Rol_id_rol) REFERENCES Rol (id_rol),
   CONSTRAINT fk_Rol_permisos_Permiso FOREIGN KEY (Permiso_id_permiso) REFERENCES Permiso (id_permiso)
+);
   
   
   
