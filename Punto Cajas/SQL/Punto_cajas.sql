@@ -33,6 +33,24 @@ CREATE TABLE MedioPago (
   PRIMARY KEY (id_medio_pago)
 );
 
+CREATE TABLE Permiso (
+  id_permiso INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(100),
+  descripcion VARCHAR(100),
+  PRIMARY KEY (id_permiso)
+);
+
+CREATE TABLE Rol_permisos (
+  id_roles_y_permisos INT NOT NULL AUTO_INCREMENT,
+  Rol_id_rol INT NOT NULL,
+  Permiso_id_permiso INT NOT NULL,
+  PRIMARY KEY (id_roles_y_permisos),
+  CONSTRAINT fk_Rol_permisos_Rol FOREIGN KEY (Rol_id_rol) REFERENCES Rol (id_rol),
+  CONSTRAINT fk_Rol_permisos_Permiso FOREIGN KEY (Permiso_id_permiso) REFERENCES Permiso (id_permiso)
+  
+  
+  
+
 CREATE TABLE Usuario (
   id_usuario INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(45) NOT NULL,
@@ -42,6 +60,9 @@ CREATE TABLE Usuario (
   telefono VARCHAR(45) NULL,
   correo VARCHAR(45) NOT NULL,
   clave VARCHAR(45) NOT NULL,
+  fecha_de_nacimiento DATE,
+  fecha_de_vencimiento DATE,
+  autorizacion_datos TINYINT,
   TipoDocumento_id_documento INT NOT NULL,
   Rol_id_rol INT NOT NULL,
   PRIMARY KEY (id_usuario),
@@ -148,3 +169,5 @@ CREATE TABLE Pago (
   CONSTRAINT fk_Pago_Factura FOREIGN KEY (FacturaCabecera_id_factura) REFERENCES FacturaCabecera (id_factura),
   CONSTRAINT fk_Pago_MedioPago FOREIGN KEY (MedioPago_id_medio_pago) REFERENCES MedioPago (id_medio_pago)
 );
+
+
