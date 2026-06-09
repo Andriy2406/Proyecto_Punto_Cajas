@@ -2,171 +2,171 @@ CREATE DATABASE punto_cajas_db;
 USE punto_cajas_db;
 
 CREATE TABLE TipoDocumento (
-  id_documento INT NOT NULL AUTO_INCREMENT,
-  descripcion_tipo VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_documento)
+  idDocumento INT NOT NULL AUTO_INCREMENT,
+  descripcionTipo VARCHAR(45) NOT NULL,
+  PRIMARY KEY (idDocumento)
 );
 
 CREATE TABLE Rol (
-  id_rol INT NOT NULL AUTO_INCREMENT,
-  detalle_rol VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_rol)
+  idRol INT NOT NULL AUTO_INCREMENT,
+  detalleRol VARCHAR(45) NOT NULL,
+  PRIMARY KEY (idRol)
 );
 
 CREATE TABLE TiposDocCon (
-  id_doc_con INT NOT NULL AUTO_INCREMENT,
-  codigo_con INT NOT NULL,
-  numero_actual INT NOT NULL,
-  PRIMARY KEY (id_doc_con)
+  idDocCon INT NOT NULL AUTO_INCREMENT,
+  codigoCon INT NOT NULL,
+  numeroActual INT NOT NULL,
+  PRIMARY KEY (idDocCon)
 );
 
 CREATE TABLE Catalogo (
-  id_catalogo INT NOT NULL AUTO_INCREMENT,
-  stock_actual VARCHAR(45) NOT NULL,
+  idCatalogo INT NOT NULL AUTO_INCREMENT,
+  stockActual VARCHAR(45) NOT NULL,
   url VARCHAR(45) NULL,
-  PRIMARY KEY (id_catalogo)
+  PRIMARY KEY (idCatalogo)
 );
 
 CREATE TABLE MedioPago (
-  id_medio_pago INT NOT NULL AUTO_INCREMENT,
-  seleccionar_pago VARCHAR(45) NOT NULL,
-  PRIMARY KEY (id_medio_pago)
+  idMedioPago INT NOT NULL AUTO_INCREMENT,
+  seleccionarPago VARCHAR(45) NOT NULL,
+  PRIMARY KEY (idMedioPago)
 );
 
 CREATE TABLE Permiso (
-  id_permiso INT NOT NULL AUTO_INCREMENT,
+  idPermiso INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(100),
   descripcion VARCHAR(100),
-  PRIMARY KEY (id_permiso)
+  PRIMARY KEY (idPermiso)
 );
 
-CREATE TABLE Rol_permisos (
-  id_rol INT NOT NULL,
-  id_permiso INT NOT NULL,
-  CONSTRAINT fk_Rol_permisos_Rol FOREIGN KEY (id_rol) REFERENCES Rol (id_rol),
-  CONSTRAINT fk_Rol_permisos_Permiso FOREIGN KEY (id_permiso) REFERENCES Permiso (id_permiso)
+CREATE TABLE RolPermisos (
+  idRol INT NOT NULL,
+  idPermiso INT NOT NULL,
+  CONSTRAINT fk_RolPermisos_Rol FOREIGN KEY (idRol) REFERENCES Rol (idRol),
+  CONSTRAINT fk_RolPermisos_Permiso FOREIGN KEY (idPermiso) REFERENCES Permiso (idPermiso)
 );
   
   
   
 
 CREATE TABLE Usuario (
-  id_usuario INT NOT NULL AUTO_INCREMENT,
+  idUsuario INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(45) NOT NULL,
   apellido VARCHAR(45) NOT NULL,
-  identificacion_usuario VARCHAR(45) NOT NULL,
+  identificacionUsuario VARCHAR(45) NOT NULL,
   direccion VARCHAR(45) NULL,
   telefono VARCHAR(45) NULL,
   correo VARCHAR(45) NOT NULL,
   clave VARCHAR(45) NOT NULL,
-  fecha_de_nacimiento DATE,
-  fecha_de_vencimiento DATE,
-  autorizacion_datos TINYINT,
-  id_documento INT NOT NULL,
-  id_rol INT NOT NULL,
-  PRIMARY KEY (id_usuario),
-  CONSTRAINT fk_Usuario_TipoDocumento FOREIGN KEY (id_documento) REFERENCES TipoDocumento (id_documento),
-  CONSTRAINT fk_Usuario_Rol FOREIGN KEY (id_rol) REFERENCES Rol (id_rol)
+  fechaDeNacimiento DATE,
+  fechaDeVencimiento DATE,
+  autorizacionDatos TINYINT,
+  idDocumento INT NOT NULL,
+  idRol INT NOT NULL,
+  PRIMARY KEY (idUsuario),
+  CONSTRAINT fk_Usuario_TipoDocumento FOREIGN KEY (idDocumento) REFERENCES TipoDocumento (idDocumento),
+  CONSTRAINT fk_Usuario_Rol FOREIGN KEY (idRol) REFERENCES Rol (idRol)
 );
 
 CREATE TABLE Producto (
-  id_producto INT NOT NULL AUTO_INCREMENT,
+  idProducto INT NOT NULL AUTO_INCREMENT,
   descripcion VARCHAR(45) NOT NULL,
   precio FLOAT NOT NULL,
-  id_catalogo INT NOT NULL,
-  PRIMARY KEY (id_producto),
-  CONSTRAINT fk_Producto_Catalogo FOREIGN KEY (id_catalogo) REFERENCES Catalogo (id_catalogo)
+  idCatalogo INT NOT NULL,
+  PRIMARY KEY (idProducto),
+  CONSTRAINT fk_Producto_Catalogo FOREIGN KEY (idCatalogo) REFERENCES Catalogo (idCatalogo)
 );
 
 CREATE TABLE CotizacionCabecera (
-  id_cotizacion INT NOT NULL AUTO_INCREMENT,
+  idCotizacion INT NOT NULL AUTO_INCREMENT,
   fecha DATE NOT NULL,
-  valor_unitario DECIMAL(10,2) NOT NULL,
+  valorUnitario DECIMAL(10,2) NOT NULL,
   iva DECIMAL(10,2) NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL,
   total DECIMAL(10,2) NOT NULL,
-  id_usuario INT NOT NULL,
-  id_doc_con INT NOT NULL,
-  PRIMARY KEY (id_cotizacion),
-  CONSTRAINT fk_Cotizacion_Usuario FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario),
-  CONSTRAINT fk_Cotizacion_TiposDocCon FOREIGN KEY (id_doc_con) REFERENCES TiposDocCon (id_doc_con)
+  idUsuario INT NOT NULL,
+  idDocCon INT NOT NULL,
+  PRIMARY KEY (idCotizacion),
+  CONSTRAINT fk_Cotizacion_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario),
+  CONSTRAINT fk_Cotizacion_TiposDocCon FOREIGN KEY (idDocCon) REFERENCES TiposDocCon (idDocCon)
 );
 
 CREATE TABLE DetalleCotizacion (
-  id_detalle INT NOT NULL AUTO_INCREMENT,
+  idDetalle INT NOT NULL AUTO_INCREMENT,
   cantidad INT NOT NULL,
   alto DECIMAL(10,2) NOT NULL,
   largo DECIMAL(10,2) NOT NULL,
   ancho DECIMAL(10,2) NOT NULL,
   color VARCHAR(45) NULL,
   acabado VARCHAR(45) NULL,
-  descripcion_uso_caja VARCHAR(45) NULL,
-  id_cotizacion INT NOT NULL,
-  PRIMARY KEY (id_detalle),
-  CONSTRAINT fk_DetalleCot_Cabecera FOREIGN KEY (id_cotizacion) REFERENCES CotizacionCabecera (id_cotizacion)
+  descripcionUsoCaja VARCHAR(45) NULL,
+  idCotizacion INT NOT NULL,
+  PRIMARY KEY (idDetalle),
+  CONSTRAINT fk_DetalleCot_Cabecera FOREIGN KEY (idCotizacion) REFERENCES CotizacionCabecera (idCotizacion)
 );
 
 CREATE TABLE PedidoCabecera (
-  id_pedido INT NOT NULL AUTO_INCREMENT,
+  idPedido INT NOT NULL AUTO_INCREMENT,
   fecha DATE NOT NULL,
-  direccion_envio VARCHAR(45) NOT NULL,
+  direccionEnvio VARCHAR(45) NOT NULL,
   total FLOAT NOT NULL,
-  estado_pedido VARCHAR(45) NOT NULL,
-  id_cotizacion INT NOT NULL,
-  PRIMARY KEY (id_pedido),
-  CONSTRAINT fk_Pedido_Cotizacion FOREIGN KEY (id_cotizacion) REFERENCES CotizacionCabecera (id_cotizacion)
+  estadoPedido VARCHAR(45) NOT NULL,
+  idCotizacion INT NOT NULL,
+  PRIMARY KEY (idPedido),
+  CONSTRAINT fk_Pedido_Cotizacion FOREIGN KEY (idCotizacion) REFERENCES CotizacionCabecera (idCotizacion)
 );
 
 
 CREATE TABLE FacturaCabecera (
-  id_factura INT NOT NULL AUTO_INCREMENT,
-  numero_factura INT NOT NULL,
+  idFactura INT NOT NULL AUTO_INCREMENT,
+  numeroFactura INT NOT NULL,
   total DECIMAL(10,2) NOT NULL,
-  id_pedido INT NOT NULL,
-  id_cotizacion INT NOT NULL, 
-  PRIMARY KEY (id_factura),
-  CONSTRAINT fk_Factura_Pedido FOREIGN KEY (id_pedido) 
-    REFERENCES PedidoCabecera (id_pedido),
-  CONSTRAINT fk_Factura_Cotizacion FOREIGN KEY (id_cotizacion) 
-    REFERENCES CotizacionCabecera (id_cotizacion) 
+  idPedido INT NOT NULL,
+  idCotizacion INT NOT NULL, 
+  PRIMARY KEY (idFactura),
+  CONSTRAINT fk_Factura_Pedido FOREIGN KEY (idPedido) 
+    REFERENCES PedidoCabecera (idPedido),
+  CONSTRAINT fk_Factura_Cotizacion FOREIGN KEY (idCotizacion) 
+    REFERENCES CotizacionCabecera (idCotizacion) 
 );
 
 
 CREATE TABLE PedidoDetalle (
-  id_pedido_detalle INT NOT NULL AUTO_INCREMENT,
+  idPedidoDetalle INT NOT NULL AUTO_INCREMENT,
   cantidad INT NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL,
-  id_pedido INT NOT NULL,
-  id_cotizacion INT NOT NULL,
-  PRIMARY KEY (id_pedido_detalle),
-  CONSTRAINT fk_PedidoDetalle_Pedido FOREIGN KEY (id_pedido) 
-    REFERENCES PedidoCabecera (id_pedido),
-  CONSTRAINT fk_PedidoDetalle_Cotizacion FOREIGN KEY (id_cotizacion) 
-    REFERENCES CotizacionCabecera (id_cotizacion)
+  idPedido INT NOT NULL,
+  idCotizacion INT NOT NULL,
+  PRIMARY KEY (idPedidoDetalle),
+  CONSTRAINT fk_PedidoDetalle_Pedido FOREIGN KEY (idPedido) 
+    REFERENCES PedidoCabecera (idPedido),
+  CONSTRAINT fk_PedidoDetalle_Cotizacion FOREIGN KEY (idCotizacion) 
+    REFERENCES CotizacionCabecera (idCotizacion)
 );
 CREATE TABLE DetalleFactura (
-  id_detalle_factura INT NOT NULL AUTO_INCREMENT,
+  idDetalleFactura INT NOT NULL AUTO_INCREMENT,
   cantidad INT NOT NULL,
-  valor_unitario DECIMAL(10,2) NOT NULL,
+  valorUnitario DECIMAL(10,2) NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL,
-  id_factura INT NOT NULL,
-  id_producto INT NOT NULL,
-  PRIMARY KEY (id_detalle_factura),
-  CONSTRAINT fk_DetalleFactura_Factura FOREIGN KEY (id_factura) REFERENCES FacturaCabecera (id_factura),
-  CONSTRAINT fk_DetalleFactura_Producto FOREIGN KEY (id_producto) REFERENCES Producto (id_producto)
+  idFactura INT NOT NULL,
+  idProducto INT NOT NULL,
+  PRIMARY KEY (idDetalleFactura),
+  CONSTRAINT fk_DetalleFactura_Factura FOREIGN KEY (idFactura) REFERENCES FacturaCabecera (idFactura),
+  CONSTRAINT fk_DetalleFactura_Producto FOREIGN KEY (idProducto) REFERENCES Producto (idProducto)
 );
 
 CREATE TABLE Pago (
-  id_pago INT NOT NULL AUTO_INCREMENT,
+  idPago INT NOT NULL AUTO_INCREMENT,
   monto DECIMAL(10,2) NOT NULL,
   fecha DATE NOT NULL,
   total DECIMAL(10,2) NOT NULL,
-  referencia_pago VARCHAR(45) NULL,
-  id_factura INT NOT NULL,
-  id_medio_pago INT NOT NULL,
-  PRIMARY KEY (id_pago),
-  CONSTRAINT fk_Pago_Factura FOREIGN KEY (id_factura) REFERENCES FacturaCabecera (id_factura),
-  CONSTRAINT fk_Pago_MedioPago FOREIGN KEY (id_medio_pago) REFERENCES MedioPago (id_medio_pago)
+  referenciaPago VARCHAR(45) NULL,
+  idFactura INT NOT NULL,
+  idMedioPago INT NOT NULL,
+  PRIMARY KEY (idPago),
+  CONSTRAINT fk_Pago_Factura FOREIGN KEY (idFactura) REFERENCES FacturaCabecera (idFactura),
+  CONSTRAINT fk_Pago_MedioPago FOREIGN KEY (idMedioPago) REFERENCES MedioPago (idMedioPago)
 );
 
 
