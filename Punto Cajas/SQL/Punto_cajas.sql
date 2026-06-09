@@ -41,10 +41,10 @@ CREATE TABLE Permiso (
 );
 
 CREATE TABLE Rol_permisos (
-  Rol_id_rol INT NOT NULL,
-  Permiso_id_permiso INT NOT NULL,
-  CONSTRAINT fk_Rol_permisos_Rol FOREIGN KEY (Rol_id_rol) REFERENCES Rol (id_rol),
-  CONSTRAINT fk_Rol_permisos_Permiso FOREIGN KEY (Permiso_id_permiso) REFERENCES Permiso (id_permiso)
+  id_rol INT NOT NULL,
+  id_permiso INT NOT NULL,
+  CONSTRAINT fk_Rol_permisos_Rol FOREIGN KEY (id_rol) REFERENCES Rol (id_rol),
+  CONSTRAINT fk_Rol_permisos_Permiso FOREIGN KEY (id_permiso) REFERENCES Permiso (id_permiso)
 );
   
   
@@ -62,20 +62,20 @@ CREATE TABLE Usuario (
   fecha_de_nacimiento DATE,
   fecha_de_vencimiento DATE,
   autorizacion_datos TINYINT,
-  TipoDocumento_id_documento INT NOT NULL,
-  Rol_id_rol INT NOT NULL,
+  id_documento INT NOT NULL,
+  id_rol INT NOT NULL,
   PRIMARY KEY (id_usuario),
-  CONSTRAINT fk_Usuario_TipoDocumento FOREIGN KEY (TipoDocumento_id_documento) REFERENCES TipoDocumento (id_documento),
-  CONSTRAINT fk_Usuario_Rol FOREIGN KEY (Rol_id_rol) REFERENCES Rol (id_rol)
+  CONSTRAINT fk_Usuario_TipoDocumento FOREIGN KEY (id_documento) REFERENCES TipoDocumento (id_documento),
+  CONSTRAINT fk_Usuario_Rol FOREIGN KEY (id_rol) REFERENCES Rol (id_rol)
 );
 
 CREATE TABLE Producto (
   id_producto INT NOT NULL AUTO_INCREMENT,
   descripcion VARCHAR(45) NOT NULL,
   precio FLOAT NOT NULL,
-  Catalogo_id_catalogo INT NOT NULL,
+  id_catalogo INT NOT NULL,
   PRIMARY KEY (id_producto),
-  CONSTRAINT fk_Producto_Catalogo FOREIGN KEY (Catalogo_id_catalogo) REFERENCES Catalogo (id_catalogo)
+  CONSTRAINT fk_Producto_Catalogo FOREIGN KEY (id_catalogo) REFERENCES Catalogo (id_catalogo)
 );
 
 CREATE TABLE CotizacionCabecera (
@@ -85,11 +85,11 @@ CREATE TABLE CotizacionCabecera (
   iva DECIMAL(10,2) NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL,
   total DECIMAL(10,2) NOT NULL,
-  Usuario_id_usuario INT NOT NULL,
-  TiposDocCon_id_doc_con INT NOT NULL,
+  id_usuario INT NOT NULL,
+  id_doc_con INT NOT NULL,
   PRIMARY KEY (id_cotizacion),
-  CONSTRAINT fk_Cotizacion_Usuario FOREIGN KEY (Usuario_id_usuario) REFERENCES Usuario (id_usuario),
-  CONSTRAINT fk_Cotizacion_TiposDocCon FOREIGN KEY (TiposDocCon_id_doc_con) REFERENCES TiposDocCon (id_doc_con)
+  CONSTRAINT fk_Cotizacion_Usuario FOREIGN KEY (id_usuario) REFERENCES Usuario (id_usuario),
+  CONSTRAINT fk_Cotizacion_TiposDocCon FOREIGN KEY (id_doc_con) REFERENCES TiposDocCon (id_doc_con)
 );
 
 CREATE TABLE DetalleCotizacion (
@@ -101,9 +101,9 @@ CREATE TABLE DetalleCotizacion (
   color VARCHAR(45) NULL,
   acabado VARCHAR(45) NULL,
   descripcion_uso_caja VARCHAR(45) NULL,
-  CotizacionCabecera_id_cotizacion INT NOT NULL,
+  id_cotizacion INT NOT NULL,
   PRIMARY KEY (id_detalle),
-  CONSTRAINT fk_DetalleCot_Cabecera FOREIGN KEY (CotizacionCabecera_id_cotizacion) REFERENCES CotizacionCabecera (id_cotizacion)
+  CONSTRAINT fk_DetalleCot_Cabecera FOREIGN KEY (id_cotizacion) REFERENCES CotizacionCabecera (id_cotizacion)
 );
 
 CREATE TABLE PedidoCabecera (
@@ -112,9 +112,9 @@ CREATE TABLE PedidoCabecera (
   direccion_envio VARCHAR(45) NOT NULL,
   total FLOAT NOT NULL,
   estado_pedido VARCHAR(45) NOT NULL,
-  CotizacionCabecera_id_cotizacion INT NOT NULL,
+  id_cotizacion INT NOT NULL,
   PRIMARY KEY (id_pedido),
-  CONSTRAINT fk_Pedido_Cotizacion FOREIGN KEY (CotizacionCabecera_id_cotizacion) REFERENCES CotizacionCabecera (id_cotizacion)
+  CONSTRAINT fk_Pedido_Cotizacion FOREIGN KEY (id_cotizacion) REFERENCES CotizacionCabecera (id_cotizacion)
 );
 
 
@@ -122,12 +122,12 @@ CREATE TABLE FacturaCabecera (
   id_factura INT NOT NULL AUTO_INCREMENT,
   numero_factura INT NOT NULL,
   total DECIMAL(10,2) NOT NULL,
-  PedidoCabecera_id_pedido INT NOT NULL,
-  PedidoCabecera_CotizacionCabecera_id_cotizacion INT NOT NULL, 
+  id_pedido INT NOT NULL,
+  id_cotizacion INT NOT NULL, 
   PRIMARY KEY (id_factura),
-  CONSTRAINT fk_Factura_Pedido FOREIGN KEY (PedidoCabecera_id_pedido) 
+  CONSTRAINT fk_Factura_Pedido FOREIGN KEY (id_pedido) 
     REFERENCES PedidoCabecera (id_pedido),
-  CONSTRAINT fk_Factura_Cotizacion FOREIGN KEY (PedidoCabecera_CotizacionCabecera_id_cotizacion) 
+  CONSTRAINT fk_Factura_Cotizacion FOREIGN KEY (id_cotizacion) 
     REFERENCES CotizacionCabecera (id_cotizacion) 
 );
 
@@ -136,12 +136,12 @@ CREATE TABLE PedidoDetalle (
   id_pedido_detalle INT NOT NULL AUTO_INCREMENT,
   cantidad INT NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL,
-  PedidoCabecera_id_pedido INT NOT NULL,
-  PedidoCabecera_CotizacionCabecera_id_cotizacion INT NOT NULL,
+  id_pedido INT NOT NULL,
+  id_cotizacion INT NOT NULL,
   PRIMARY KEY (id_pedido_detalle),
-  CONSTRAINT fk_PedidoDetalle_Pedido FOREIGN KEY (PedidoCabecera_id_pedido) 
+  CONSTRAINT fk_PedidoDetalle_Pedido FOREIGN KEY (id_pedido) 
     REFERENCES PedidoCabecera (id_pedido),
-  CONSTRAINT fk_PedidoDetalle_Cotizacion FOREIGN KEY (PedidoCabecera_CotizacionCabecera_id_cotizacion) 
+  CONSTRAINT fk_PedidoDetalle_Cotizacion FOREIGN KEY (id_cotizacion) 
     REFERENCES CotizacionCabecera (id_cotizacion)
 );
 CREATE TABLE DetalleFactura (
@@ -149,11 +149,11 @@ CREATE TABLE DetalleFactura (
   cantidad INT NOT NULL,
   valor_unitario DECIMAL(10,2) NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL,
-  FacturaCabecera_id_factura INT NOT NULL,
-  Producto_id_producto INT NOT NULL,
+  id_factura INT NOT NULL,
+  id_producto INT NOT NULL,
   PRIMARY KEY (id_detalle_factura),
-  CONSTRAINT fk_DetalleFactura_Factura FOREIGN KEY (FacturaCabecera_id_factura) REFERENCES FacturaCabecera (id_factura),
-  CONSTRAINT fk_DetalleFactura_Producto FOREIGN KEY (Producto_id_producto) REFERENCES Producto (id_producto)
+  CONSTRAINT fk_DetalleFactura_Factura FOREIGN KEY (id_factura) REFERENCES FacturaCabecera (id_factura),
+  CONSTRAINT fk_DetalleFactura_Producto FOREIGN KEY (id_producto) REFERENCES Producto (id_producto)
 );
 
 CREATE TABLE Pago (
@@ -162,11 +162,11 @@ CREATE TABLE Pago (
   fecha DATE NOT NULL,
   total DECIMAL(10,2) NOT NULL,
   referencia_pago VARCHAR(45) NULL,
-  FacturaCabecera_id_factura INT NOT NULL,
-  MedioPago_id_medio_pago INT NOT NULL,
+  id_factura INT NOT NULL,
+  id_medio_pago INT NOT NULL,
   PRIMARY KEY (id_pago),
-  CONSTRAINT fk_Pago_Factura FOREIGN KEY (FacturaCabecera_id_factura) REFERENCES FacturaCabecera (id_factura),
-  CONSTRAINT fk_Pago_MedioPago FOREIGN KEY (MedioPago_id_medio_pago) REFERENCES MedioPago (id_medio_pago)
+  CONSTRAINT fk_Pago_Factura FOREIGN KEY (id_factura) REFERENCES FacturaCabecera (id_factura),
+  CONSTRAINT fk_Pago_MedioPago FOREIGN KEY (id_medio_pago) REFERENCES MedioPago (id_medio_pago)
 );
 
 
