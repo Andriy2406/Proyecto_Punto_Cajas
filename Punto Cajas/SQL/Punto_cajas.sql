@@ -41,10 +41,8 @@ CREATE TABLE Permiso (
 );
 
 CREATE TABLE Rol_permisos (
-  id_roles_y_permisos INT NOT NULL AUTO_INCREMENT,
   Rol_id_rol INT NOT NULL,
   Permiso_id_permiso INT NOT NULL,
-  PRIMARY KEY (id_roles_y_permisos),
   CONSTRAINT fk_Rol_permisos_Rol FOREIGN KEY (Rol_id_rol) REFERENCES Rol (id_rol),
   CONSTRAINT fk_Rol_permisos_Permiso FOREIGN KEY (Permiso_id_permiso) REFERENCES Permiso (id_permiso)
 );
