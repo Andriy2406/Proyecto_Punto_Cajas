@@ -1,85 +1,85 @@
 CREATE DATABASE punto_cajas_db;
 USE punto_cajas_db;
 
-CREATE TABLE TipoDocumento (
-  idDocumento INT NOT NULL AUTO_INCREMENT,
-  descripcionTipo VARCHAR(45) NOT NULL,
-  PRIMARY KEY (idDocumento)
+CREATE TABLE tipos_de_documentos (
+  id_documento INT NOT NULL AUTO_INCREMENT,
+  descripcion_tipo VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_documento)
 );
 
-CREATE TABLE Rol (
-  idRol INT NOT NULL AUTO_INCREMENT,
-  detalleRol VARCHAR(45) NOT NULL,
-  PRIMARY KEY (idRol)
+CREATE TABLE roles (
+  id_rol INT NOT NULL AUTO_INCREMENT,
+  detalle_rol VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_rol)
 );
 
-CREATE TABLE TiposDocCon (
-  idDocCon INT NOT NULL AUTO_INCREMENT,
-  codigoCon INT NOT NULL,
-  numeroActual INT NOT NULL,
-  PRIMARY KEY (idDocCon)
+CREATE TABLE tipos_doc_con (
+  id_doc_con INT NOT NULL AUTO_INCREMENT,
+  codigo_con INT NOT NULL,
+  numero_actual INT NOT NULL,
+  PRIMARY KEY (id_doc_con)
 );
 
-CREATE TABLE Catalogo (
-  idCatalogo INT NOT NULL AUTO_INCREMENT,
-  stockActual VARCHAR(45) NOT NULL,
+CREATE TABLE catalogos (
+  id_catalogo INT NOT NULL AUTO_INCREMENT,
+  stock_actual VARCHAR(45) NOT NULL,
   url VARCHAR(45) NULL,
-  PRIMARY KEY (idCatalogo)
+  PRIMARY KEY (id_catalogo)
 );
 
-CREATE TABLE MedioPago (
-  idMedioPago INT NOT NULL AUTO_INCREMENT,
-  seleccionarPago VARCHAR(45) NOT NULL,
-  PRIMARY KEY (idMedioPago)
+CREATE TABLE medios_de_pagos (
+  id_medio_pago INT NOT NULL AUTO_INCREMENT,
+  seleccionar_pago VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_medio_pago)
 );
 
-CREATE TABLE Permiso (
-  idPermiso INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE permisos (
+  id_permiso INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(100),
   descripcion VARCHAR(100),
-  PRIMARY KEY (idPermiso)
+  PRIMARY KEY (id_permiso)
 );
 
-CREATE TABLE RolPermisos (
-  idRol INT NOT NULL,
-  idPermiso INT NOT NULL,
-  CONSTRAINT fk_RolPermisos_Rol FOREIGN KEY (idRol) REFERENCES Rol (idRol),
-  CONSTRAINT fk_RolPermisos_Permiso FOREIGN KEY (idPermiso) REFERENCES Permiso (idPermiso)
+CREATE TABLE rol_permisos (
+  id_rol INT NOT NULL,
+  id_permiso INT NOT NULL,
+  CONSTRAINT fk_rol_permisos_roles FOREIGN KEY (id_rol) REFERENCES roles (id_rol),
+  CONSTRAINT fk_rol_permisos_permisos FOREIGN KEY (id_permiso) REFERENCES permisos (id_permiso)
 );
   
   
   
 
-CREATE TABLE Usuario (
-  idUsuario INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE usuarios (
+  id_usuario INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(45) NOT NULL,
   apellido VARCHAR(45) NOT NULL,
-  identificacionUsuario VARCHAR(45) NOT NULL,
+  identificacion_usuario VARCHAR(45) NOT NULL,
   direccion VARCHAR(45) NULL,
   telefono VARCHAR(45) NULL,
   correo VARCHAR(45) NOT NULL,
   clave VARCHAR(45) NOT NULL,
-  fechaDeNacimiento DATE,
-  fechaDeVencimiento DATE,
+  fecha_de_nacimiento DATE,
+  fecha_de_vencimiento DATE,
   autorizacionDatos TINYINT,
-  idDocumento INT NOT NULL,
-  idRol INT NOT NULL,
-  PRIMARY KEY (idUsuario),
-  CONSTRAINT fk_Usuario_TipoDocumento FOREIGN KEY (idDocumento) REFERENCES TipoDocumento (idDocumento),
-  CONSTRAINT fk_Usuario_Rol FOREIGN KEY (idRol) REFERENCES Rol (idRol)
+  id_documento INT NOT NULL,
+  id_rol INT NOT NULL,
+  PRIMARY KEY (id_usuario),
+  CONSTRAINT fk_usuario_tipo_de_documentos FOREIGN KEY (id_documento) REFERENCES tipos_de_documentos (idDocumento),
+  CONSTRAINT fk_usuario_roles FOREIGN KEY (id_rol) REFERENCES roles (id_rol)
 );
 
-CREATE TABLE Producto (
-  idProducto INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE productos (
+  id_producto INT NOT NULL AUTO_INCREMENT,
   descripcion VARCHAR(45) NOT NULL,
   precio FLOAT NOT NULL,
-  idCatalogo INT NOT NULL,
-  PRIMARY KEY (idProducto),
-  CONSTRAINT fk_Producto_Catalogo FOREIGN KEY (idCatalogo) REFERENCES Catalogo (idCatalogo)
+  id_catalogo INT NOT NULL,
+  PRIMARY KEY (id_producto),
+  CONSTRAINT fk_producto_catalogo FOREIGN KEY (id_catalogo) REFERENCES catalogos (id_catalogo)
 );
 
-CREATE TABLE CotizacionCabecera (
-  idCotizacion INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE cotizaciones_cabeceras (
+  id_cotizacion INT NOT NULL AUTO_INCREMENT,
   fecha DATE NOT NULL,
   valorUnitario DECIMAL(10,2) NOT NULL,
   iva DECIMAL(10,2) NOT NULL,
