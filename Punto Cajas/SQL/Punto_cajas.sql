@@ -92,7 +92,7 @@ CREATE TABLE cotizaciones_cabeceras (
   CONSTRAINT fk_cotizacion_tipos_doc_con FOREIGN KEY (id_doc_con) REFERENCES tipos_doc_con (id_doc_con)
 );
 
-CREATE TABLE detalles_cotizacion (
+CREATE TABLE detalles_cotizaciones (
   id_detalle INT NOT NULL AUTO_INCREMENT,
   cantidad INT NOT NULL,
   alto DECIMAL(10,2) NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE detalles_cotizacion (
   CONSTRAINT fk_detalle_cot_cabecera FOREIGN KEY (id_cotizacion) REFERENCES cotizaciones_cabeceras (id_cotizacion)
 );
 
-CREATE TABLE pedidos_cabecera (
+CREATE TABLE pedidos_cabeceras (
   id_pedido INT NOT NULL AUTO_INCREMENT,
   fecha DATE NOT NULL,
   direccion_envio VARCHAR(45) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE pedidos_cabecera (
 );
 
 
-CREATE TABLE facturas_cabecera (
+CREATE TABLE facturas_cabeceras (
   id_factura INT NOT NULL AUTO_INCREMENT,
   numero_factura INT NOT NULL,
   total DECIMAL(10,2) NOT NULL,
@@ -126,13 +126,13 @@ CREATE TABLE facturas_cabecera (
   id_cotizacion INT NOT NULL, 
   PRIMARY KEY (id_factura),
   CONSTRAINT fk_factura_pedido FOREIGN KEY (id_pedido) 
-    REFERENCES pedidos_cabecera (id_pedido),
+    REFERENCES pedidos_cabeceras (id_pedido),
   CONSTRAINT fk_factura_cotizacion FOREIGN KEY (id_cotizacion) 
     REFERENCES cotizaciones_cabeceras (id_cotizacion) 
 );
 
 
-CREATE TABLE pedidos_detalle (
+CREATE TABLE pedidos_detalles (
   id_pedido_detalle INT NOT NULL AUTO_INCREMENT,
   cantidad INT NOT NULL,
   subtotal DECIMAL(10,2) NOT NULL,
@@ -140,11 +140,11 @@ CREATE TABLE pedidos_detalle (
   id_cotizacion INT NOT NULL,
   PRIMARY KEY (id_pedido_detalle),
   CONSTRAINT fk_pedido_detalle_Pedido FOREIGN KEY (id_pedido) 
-    REFERENCES pedidos_cabecera (id_pedido),
+    REFERENCES pedidos_cabeceras (id_pedido),
   CONSTRAINT fk_pedido_detalle_cotizacion FOREIGN KEY (id_cotizacion) 
     REFERENCES cotizaciones_cabeceras (id_cotizacion)
 );
-CREATE TABLE detalles_factura (
+CREATE TABLE detalles_facturas (
   id_detalle_factura INT NOT NULL AUTO_INCREMENT,
   cantidad INT NOT NULL,
   valor_unitario DECIMAL(10,2) NOT NULL,
@@ -152,7 +152,7 @@ CREATE TABLE detalles_factura (
   id_factura INT NOT NULL,
   id_producto INT NOT NULL,
   PRIMARY KEY (id_detalle_factura),
-  CONSTRAINT fk_detalle_factura_factura FOREIGN KEY (id_factura) REFERENCES facturas_cabecera (id_factura),
+  CONSTRAINT fk_detalle_factura_factura FOREIGN KEY (id_factura) REFERENCES facturas_cabeceras (id_factura),
   CONSTRAINT fk_detalle_factura_producto FOREIGN KEY (id_producto) REFERENCES productos (id_producto)
 );
 
@@ -165,7 +165,7 @@ CREATE TABLE pagos (
   id_factura INT NOT NULL,
   id_medio_pago INT NOT NULL,
   PRIMARY KEY (id_pago),
-  CONSTRAINT fk_pago_factura FOREIGN KEY (id_factura) REFERENCES facturas_cabecera (id_factura),
+  CONSTRAINT fk_pago_factura FOREIGN KEY (id_factura) REFERENCES facturas_cabeceras (id_factura),
   CONSTRAINT fk_pago_medio_pago FOREIGN KEY (id_medio_pago) REFERENCES medios_de_pagos (id_medio_pago)
 );
 
