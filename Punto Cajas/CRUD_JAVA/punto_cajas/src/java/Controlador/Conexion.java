@@ -15,7 +15,7 @@ public class Conexion {
     String cadena = "jdbc:postgresql://"+ip+":"+puerto+"/"+bd;
     
     
-    public Connection establecerConexion()
+    public Connection conn()
     {
     
         try {

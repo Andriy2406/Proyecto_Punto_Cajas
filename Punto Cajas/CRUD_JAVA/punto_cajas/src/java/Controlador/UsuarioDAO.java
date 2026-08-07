@@ -11,12 +11,12 @@ public class UsuarioDAO {
     
     Usuarios miUsuario = null;
     
-    Connection establecerConexion = conect.establecerConexion();
+    Connection conn = conect.conn();
         try {
             String querySql = "SELECT id_usuario, nombre, apellido, identificacion_usuario, direccion, "
             + "telefono, correo, clave, fecha_de_nacimiento, fecha_de_vencimiento, autorizaciondatos, id_documento, id_rol FROM usuarios WHERE correo = ?";
             
-            PreparedStatement ps = establecerConexion.prepareStatement(querySql);
+            PreparedStatement ps = conn.prepareStatement(querySql);
             
             ps.setString(1, correo);
             
@@ -57,14 +57,14 @@ public class UsuarioDAO {
     
         boolean insertar = false;
         
-        Connection establecerConexion = conect.establecerConexion();
+        Connection conn = conect.conn();
         
         try {
             String querySql = "INSERT INTO usuarios (nombre, apellido, identificacion_usuario, direccion, telefono, correo, "
                 + "clave, fecha_de_nacimiento, fecha_de_vencimiento, autorizaciondatos, id_documento, id_rol) "
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
             
-            PreparedStatement ps = establecerConexion.prepareStatement(querySql);
+            PreparedStatement ps = conn.prepareStatement(querySql);
             
             ps.setString(1, miUsuario.getNombre());
             ps.setString(2, miUsuario.getApellido());
@@ -95,7 +95,7 @@ public class UsuarioDAO {
             System.out.println("Usuario registrado exitosamente.");
             
         } catch (Exception e) {
-            System.out.println("Eror al insertar Usuario: " + e.getMessage());
+            System.out.println("Error al insertar Usuario: " + e.getMessage());
         }
             return insertar;
     

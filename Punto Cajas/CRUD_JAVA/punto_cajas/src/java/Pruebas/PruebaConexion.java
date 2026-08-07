@@ -8,6 +8,6 @@ public class PruebaConexion {
     public static void main(String[] args) {
        
         Conexion ConexionNueva = new Conexion();
-        Connection Conection = ConexionNueva.establecerConexion();
+        Connection Conection = ConexionNueva.conn();
     }
 }
